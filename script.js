@@ -26,9 +26,18 @@ document.querySelectorAll('.flower').forEach(btn=>btn.addEventListener('click',(
 const dialog=$('#letterDialog');document.querySelectorAll('.secret').forEach(btn=>btn.addEventListener('click',()=>{$('#dialogTitle').textContent=btn.dataset.title;$('#dialogText').textContent=btn.dataset.message;dialog.showModal()}));$('#closeDialog').addEventListener('click',()=>dialog.close());$('#dialogOk').addEventListener('click',()=>dialog.close());
 $('#lastSurprise').addEventListener('click',()=>{$('#lastMessage').hidden=false;$('#lastSurprise').hidden=true;burst();$('#lastMessage').scrollIntoView({behavior:'smooth',block:'center'})});
 function burst(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;for(let i=0;i<25;i++){setTimeout(()=>{const e=document.createElement('span');e.className='petal';e.textContent='♥';e.style.cssText=`left:${Math.random()*100}%;font-size:${15+Math.random()*18}px;animation-duration:${5+Math.random()*4}s`;$('.petals').append(e);e.addEventListener('animationend',()=>e.remove())},i*85)}}
-// Notre musique : ajouter un fichier qui-sait.mp3 dont vous disposez des droits d'utilisation.
-const song=$('#ourSong');const sound=$('#soundBtn');
-sound.addEventListener('click',async()=>{if(!song.paused){song.pause();sound.textContent='♫ Notre musique ♡';sound.setAttribute('aria-pressed','false');return}try{await song.play();sound.textContent='♫ Pause ♡';sound.setAttribute('aria-pressed','true')}catch(err){sound.textContent='♫ Ajoute qui-sait.mp3';sound.title='Le fichier audio est absent ou ne peut pas être lu.'}});
+// Notre chanson est diffusée par le lecteur officiel YouTube, sans héberger de MP3.
+const sound=document.getElementById('soundBtn');
+const musicDialog=document.getElementById('musicDialog');
+const musicFrame=document.getElementById('musicFrame');
+const musicClose=document.getElementById('closeMusic');
+function closeMusicPlayer(){musicDialog.close();musicFrame.removeAttribute('src');sound.setAttribute('aria-expanded','false');}
+sound.setAttribute('aria-expanded','false');
+sound.setAttribute('aria-controls','musicDialog');
+sound.addEventListener('click',()=>{musicFrame.src=musicFrame.dataset.src;musicDialog.showModal();sound.setAttribute('aria-expanded','true')});
+musicClose.addEventListener('click',closeMusicPlayer);
+musicDialog.addEventListener('cancel',e=>{e.preventDefault();closeMusicPlayer()});
+musicDialog.addEventListener('click',e=>{if(e.target===musicDialog)closeMusicPlayer()});
 
 // Les huit trésors de Zoé : un Memory qui fait fleurir le jardin.
 const treasures=[{"label": "Lys", "emoji": "🌸"}, {"label": "Bague", "emoji": "💍"}, {"label": "Dragibus", "emoji": "🍬"}, {"label": "Tagada", "emoji": "🍓"}, {"label": "Lulu noisette", "emoji": "🍪"}, {"label": "Chocolat blanc", "emoji": "🍫"}, {"label": "Peluche", "emoji": "🧸"}, {"label": "Jus de pomme", "emoji": "🧃"}];

@@ -13,7 +13,15 @@
   <div class="stars" aria-hidden="true"></div>
   <div class="petals" aria-hidden="true"></div>
   <button class="sound" id="soundBtn" type="button" aria-pressed="false" title="Écouter notre chanson">♫ Notre musique ♡</button>
-  <audio id="ourSong" src="qui-sait.mp3" preload="none" loop></audio>
+  <dialog id="musicDialog" class="music-dialog" aria-labelledby="musicTitle">
+    <button id="closeMusic" class="close" type="button" aria-label="Fermer le lecteur">×</button>
+    <div class="music-heart">🎵❤️</div>
+    <h3 id="musicTitle">Notre musique à nous ♡</h3>
+    <p>« Qui sait ? » — Niro &amp; ElGrandeToto</p>
+    <div class="music-video"><iframe id="musicFrame" title="Notre chanson Qui sait ? sur YouTube" data-src="https://www.youtube-nocookie.com/embed/qjssI0OlaB0?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div>
+    <p class="music-help">Appuie sur ▶ pour lancer notre chanson, mon petit cœur ❤️</p>
+    <a class="music-link" href="https://www.youtube.com/watch?v=qjssI0OlaB0" target="_blank" rel="noopener noreferrer">Si la vidéo ne marche pas, l'écouter sur YouTube ↗</a>
+  </dialog>
   <main>
     <section class="hero" id="accueil">
       <div class="tiny">14 OCTOBRE · RIEN QUE POUR TOI</div>
